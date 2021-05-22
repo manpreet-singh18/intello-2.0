@@ -60,17 +60,14 @@ app.get("/wordnet", function (req, res) {
 // handling get request for weather
 app.get("/weather", function (req, res) {
     if (location != "") {
-        const apiKey = "2fc6f358dcf70cdc0c72d2439279f06e";
+        const apiKey = "fdfdbab10ff62740dce9fdc4ede20c17";
         const weather_url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=" + apiKey;
         const forcast_url = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=metric&appid=" + apiKey;
         //making API call to get the weather information
         https.get(weather_url, function (response) {
-            weatherData = "";
-            response.on("data", function (data) {
-                weatherDataHolder += data;
-            });
-            response.on("end", function (weatherDataHolder) {
-                const weatherData = JSON.parse(weatherDataHolder);
+            weatherDataHolder = "";
+            response.on('data', function (data) {
+                const weatherData = JSON.parse(data);
                 const icon_id = weatherData.weather[0].icon;
                 information = {
                     country: weatherData.sys.country,
@@ -88,13 +85,9 @@ app.get("/weather", function (req, res) {
         });
         //making API call to get upcoming weather information
         https.get(forcast_url, function (response) {
-            forecastDataHolder = "";
             response.on("data", function (data) {
-                forecastDataHolder += data;
-            });
-            response.on("end", function (forecastDataHolder) {
                 forcast_info = [];
-                const forcast = JSON.parse(forecastDataHolder);
+                const forcast = JSON.parse(data);
                 for (let i = 0; i < 6; i++) {
                     var forcast_date = forcast.list[i].dt_txt;
                     var temperature = forcast.list[i].main.temp;
@@ -106,7 +99,7 @@ app.get("/weather", function (req, res) {
                     var forcast_object = new Object_maker(forcast_date, min_temp, main_description, description, temperature, imageAddress);
                     forcast_info.push(forcast_object);
                 }
-            })
+            });
         });
 
         function wait() {
@@ -117,6 +110,8 @@ app.get("/weather", function (req, res) {
             });
         }
         setTimeout(wait, 3000);
+    } else {
+        res.redirect("/");
     }
 });
 // handling get request for location finder
@@ -127,12 +122,9 @@ app.get("/locationFinder", function (req, res) {
     const url = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + lattitude + "&longitude=" + longitude + "&localityLanguage=en";
     //making API call to get the reverse geocoding information that is country,state or city
     https.get(url, function (response) {
-        locationDataHolder = "";
+
         response.on("data", function (data) {
-            locationDataHolder += data;
-        });
-        response.on("end", function (locationDataHolder) {
-            const location_data = JSON.parse(locationDataHolder);
+            const location_data = JSON.parse(data);
             location_obj = {
                 country: location_data.countryName,
                 continent: location_data.continent,
@@ -193,5 +185,3 @@ app.post("/", function (req, res) {
 app.listen(process.env.PORT || 3000, function () {
     console.log("server is running on port 3000");
 });
-
-// apiKey:2fc6f358dcf70cdc0c72d2439279f06e
