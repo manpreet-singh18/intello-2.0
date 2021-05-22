@@ -1,0 +1,11 @@
+<%- include("head")%>
+<%  for(let i=0;i<wordData.length;i++){ %>
+<div class="answer">
+    <h2><%= word+" :" %> </h2>
+    <p><span>Description : </span><%= wordData[i].def%>.</p>
+    <p><span>Example Sentence : </span><%= wordData[i].exp[0] %>. </p>
+</div>
+<% } %>
+
+
+<%- include("foot")%>

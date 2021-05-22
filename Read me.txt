@@ -1,0 +1,9 @@
+instructions for setting up the project:
+1.install node.js in your system.
+2.open cmd or any other terminal in the folder where you have unzipped the project.
+3.then type : npm install
+4.after this all the dependencies will be install 
+5.now type in the cmd : nodemon app.js
+6.open your browser and in the url type : localhost:3000 and hit enter.
+
+thats it.thanks 

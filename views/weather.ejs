@@ -1,0 +1,30 @@
+<%- include("head")%>
+
+<div class="tempinfo">
+    <h2> <%=weather_info.country_name  %>, <%=weather_info.country%></h2>
+    <div class="temp">
+        <img src="<%=weather_info.imageAddress%>" alt="icon">
+        <h2>&nbsp;<%=weather_info.temperature%>°C</h2>
+    </div>
+
+</div>
+<div class="more_info">
+    <h1>Feels
+        like&nbsp;<%=weather_info.feel_like%>°C.&nbsp;<%=weather_info.main_description %>.&nbsp;<%=weather_info.description %>
+    </h1>
+</div>
+<center>
+    <h1>Weather Forcast</h1>
+</center>
+<%  for(let i=0;i<6;i++){%>
+<div class="forcast">
+    <h1><%= forcast_information[i].forcast_date%> </h1>
+    <div class="temps"><img src="<%= forcast_information[i].image %>" alt="icon" class="temp_img">
+        <p><%= forcast_information[i].temperature%>°C</p>
+    </div>
+    <div class="desc"><%= forcast_information[i].main_description %>.&nbsp;<%= forcast_information[i].description%>.
+    </div>
+</div>
+<% } %>
+
+<%- include("foot")%>

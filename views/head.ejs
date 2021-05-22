@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <title>Intello</title>
+</head>
+
+<body>
+    <main>
+        <section class="container">
+            <div class="dashboard">
+                <div class="logo">
+                    <a href="/"> <img src="img/logo.png" alt="logo" class="styled-img"></a>
+                </div>
+
+                <div>
+                    <form action="/" method="POST" id="my_form">
+                        <h2>Select any Service</h2>
+                        <input type="radio" name="service" value="weather" <%  if(page=="weather" ){%> checked <% }%>
+                            class="weatherInput">
+                        <label for="weather">Weather info</label><br>
+                        <input type="radio" name="service" value="wordnet" <%  if(page=="wordnet" ){%> checked <% }%>
+                            class="wordnetInput">
+                        <label for="wordnet">WordNet</label><br>
+                        <input type="radio" name="service" value="locationFinder" <%  if(page=="locationFinder" ){%>
+                            checked <% }%> class="locationFindInput">
+                        <label for="locationFinder">LocationFinder</label><br>
+                    </form>
+
+                </div>
+
+
+            </div>
+            <div class="interface">
+                <div>
+                    <h2>Ask Questions</h2>
+                </div>
+                <div>
+                    <input type="text" name="inputData" placeholder="Enter your query" form="my_form"
+                        autocomplete="off">
+                    <button type="submit" form="my_form">Search</button>
+                </div>

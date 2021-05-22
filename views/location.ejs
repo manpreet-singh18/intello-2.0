@@ -1,0 +1,12 @@
+<%- include("head")%>
+
+<div class="location_data">
+    <h2>Country: </h2><span><%= location_info.country %>&nbsp;<%= location_info.country_code %></span><br>
+    <h2>Continent: </h2><span><%= location_info.continent %></span><br>
+    <h2>State: </h2><span><%= location_info.state %>&nbsp;<%= location_info.state_code %></span><br>
+    <h2>City: </h2><span><%= location_info.city %></span><br>
+    <h2>Locality: </h2><span><%= location_info.locality %></span><br>
+    <h2>Lattitude: </h2><span>&nbsp;<%= lattitude %></span><br>
+    <h2>Longitude:</h2><span>&nbsp;<%= longitude %></span>
+</div>
+<%- include("foot")%>
