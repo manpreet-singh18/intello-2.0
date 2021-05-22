@@ -1,1 +1,1 @@
-# intello-2.0 is a service based application which i developed as a practuce project. it provide three main services dictionary, weather forecasting and location . depeneding upon the service chose by the user, it will give the desired results.
+# intello-2.0 is a service based application which i developed as a practice project. it provide three main services dictionary, weather forecasting and location . depeneding upon the service chose by the user, it will give the desired results.
