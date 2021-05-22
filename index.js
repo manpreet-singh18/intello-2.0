@@ -159,7 +159,7 @@ app.get("/locationFinder", function (req, res) {
             lattitude: lattitude
         });
     }
-    setTimeout(wait, 1500);
+    setTimeout(wait, 1600);
 
 
 
