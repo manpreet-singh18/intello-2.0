@@ -67,7 +67,11 @@ app.get("/weather", function (req, res) {
         https.get(weather_url, function (response) {
             weatherDataHolder = "";
             response.on('data', function (data) {
-                const weatherData = JSON.parse(data);
+                weatherDataHolder += data;
+            });
+            response.on('end', function () {
+                console.log(weatherDataHolder);
+                const weatherData = JSON.parse(weatherDataHolder);
                 const icon_id = weatherData.weather[0].icon;
                 information = {
                     country: weatherData.sys.country,
@@ -85,9 +89,14 @@ app.get("/weather", function (req, res) {
         });
         //making API call to get upcoming weather information
         https.get(forcast_url, function (response) {
+
+            forecastDataHolder = "";
             response.on("data", function (data) {
+                forecastDataHolder += data;
+            });
+            response.on("end", function () {
                 forcast_info = [];
-                const forcast = JSON.parse(data);
+                const forcast = JSON.parse(forecastDataHolder);
                 for (let i = 0; i < 6; i++) {
                     var forcast_date = forcast.list[i].dt_txt;
                     var temperature = forcast.list[i].main.temp;
@@ -99,7 +108,7 @@ app.get("/weather", function (req, res) {
                     var forcast_object = new Object_maker(forcast_date, min_temp, main_description, description, temperature, imageAddress);
                     forcast_info.push(forcast_object);
                 }
-            });
+            })
         });
 
         function wait() {
@@ -122,9 +131,12 @@ app.get("/locationFinder", function (req, res) {
     const url = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + lattitude + "&longitude=" + longitude + "&localityLanguage=en";
     //making API call to get the reverse geocoding information that is country,state or city
     https.get(url, function (response) {
-
+        locationDataHolder = "";
         response.on("data", function (data) {
-            const location_data = JSON.parse(data);
+            locationDataHolder += data;
+        });
+        response.on("end", function () {
+            const location_data = JSON.parse(locationDataHolder);
             location_obj = {
                 country: location_data.countryName,
                 continent: location_data.continent,
